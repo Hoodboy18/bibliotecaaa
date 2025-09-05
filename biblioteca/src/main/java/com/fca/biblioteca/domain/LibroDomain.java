@@ -7,14 +7,24 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class LibroDomain {
     @Autowired
     private LibroRepository libroRepository;
 
-    private List<Libro> buscarLibroPorTitulo(String titulo) {
+    /*
+    public List<Libro> buscarLibroPorTitulo(String titulo) {
+        return libroRepository.findAll(); /*= SELECT * FROM libro;
+    }
+}*/
 
-        return libroRepository.findAll();
+    public List<Libro> buscarLibroPorTitulo(String titulo, String edicion) {
+        return libroRepository.findAll() /*Regresa lista de Libros*/
+                .stream()
+                .filter(libro -> libro.getTitulo().equals(titulo))
+                .filter(libro -> libro.getEdicion().equals(edicion))
+                .collect(Collectors.toList());
     }
 }
