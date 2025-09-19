@@ -20,7 +20,7 @@ public class LibroController {
     @RequestMapping(value = "/libros", method = RequestMethod.GET)
     /*Capa de Presentación*/
     public List<Libro> buscarLibrosPorTitulo(@RequestParam String titulo, @RequestParam String edicion) {
-        return libroDomain.buscarLibroPorTitulo(titulo,edicion);/*Aqui ya traemos la lista a la capa de dominio*/
+        return libroDomain.buscarLibrosDisponibles(titulo,edicion);/*Aqui ya traemos la lista a la capa de dominio*/
     }
 }
 
