@@ -11,28 +11,33 @@ import java.util.List;
 @Controller
 public class LibroController {
 
-    /*Inyección de Dependencias*/
     private LibroDomain libroDomain;
+
     LibroController(LibroDomain libroDomain) {
         this.libroDomain = libroDomain;
     }
 
-    @RequestMapping(value = "/libros-dispoibles", method = RequestMethod.GET)
-    /*Capa de Presentación*/
-
-    @ResponseBody /*Para que nos regrese la lista de libros en un tipo Json*/
-    public List<Libro> buscarLibrosPorTitulo
-            (@RequestParam String titulo, @RequestParam String edicion) {
-        return libroDomain.buscarLibrosDisponibles(titulo,edicion);/*Aqui ya traemos la lista a la capa de dominio*/
+    @RequestMapping(value = "/libros-disponibles", method = RequestMethod.GET)
+    @ResponseBody
+    public List<Libro> buscarLibrosPorTitulo(@RequestParam String titulo, @RequestParam String edicion) {
+        return libroDomain.buscarLibrosDisponibles(titulo, edicion);
     }
 
     @RequestMapping(value = "/libros", method = RequestMethod.GET)
-    /*Capa de Presentación*/
+    @ResponseBody
+    public List<Libro> buscarLibrosDisponibles(@RequestParam String titulo, @RequestParam String edicion) {
+        return libroDomain.buscarLibros(titulo, edicion);
+    }
 
-    @ResponseBody /*Para que nos regrese la lista de libros en un tipo Json*/
-    public List<Libro> buscarLibrosDisponibles
-            (@RequestParam String titulo, @RequestParam String edicion) {
-        return libroDomain.buscarLibros(titulo,edicion);/*Aqui ya traemos la lista a la capa de dominio*/
+    @RequestMapping(value = "/libros-con-existencia", method = RequestMethod.GET)
+    @ResponseBody
+    public List<Libro> buscarLibrosConExistencia() {
+        return libroDomain.buscarLibrosConExistencia();
+    }
+
+    @RequestMapping(value = "/libros-sin-existencia", method = RequestMethod.GET)
+    @ResponseBody
+    public List<Libro> buscarLibrosSinExistencia() {
+        return libroDomain.buscarLibrosSinExistencia();
     }
 }
-
